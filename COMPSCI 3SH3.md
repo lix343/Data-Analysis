@@ -57,3 +57,66 @@
 * The new process created by fork becomes the child process of the calling process
 * This child process has the same environment as its parent; that is, it is an exact copy of the parent with only a different process ID.
 * After a new child process is created, both the parent and child will execute the next instruction following the **fork()** system call. 
+
+### Exec() System call
+
+* The ***exec()*** system call used right after ***fork()*** enables the child process to execute a different program than the one it inherits from its parent process
+* This act is also referred to as an **overlay**
+* There is a family of ***exec()*** functions, all of which have slightly different characteristics. 
+
+### Process Termination
+
+* After executing the last statement, a process is terminated.
+  * Implicitly - using the return statement
+  * Explicitly - using the **exit()** system call
+
+* Process resources are deallocated by operating system.
+* Parent may terminate the execution of children processes using the **abort()** system call. Some reasons for doing so:
+  * Child has exceeded allocated resources.
+  * Task assigned to child is no longer required.
+  * The parent is exiting and the operating system does not allow a child to continue if its parent terminates.
+
+* Some operating systems do not allow child to exist if its parent has terminated. If a process terminates, then all its children must also be terminated.
+  * **Cascading termination**. All children, grandchildren, etc. are terminated
+  * The termination is initiated by the operating system.
+
+### Child Process - Termination status
+
+* When a child process terminates, the parent can know the child's exit status using the **wait()** system call.
+
+* The call returns status information and the pid of the terminated process.
+
+  ``` c
+  pid = wait(&status)
+  ```
+
+* Unix maintains the tale of processes. This table contains the list of all processes running and includes the process status.
+
+* If a parent process terminates, its entry is removed from the table.
+
+* If a child process terminates, its entry is removed from the table only after the parent process invokes a **wait()**.
+
+* If no parent waiting (did not invoke **wait()**) process is a **zombie**.
+
+* if parent terminated without invoking **wait()**, process is an **orphan**.
+
+### Process Scheduling
+
+* Goal: Maximize CPU use, quickly switch processes onto CPU for time sharing.
+* Process scheduler must meet the above objectives by implementing suitable scheduling policies.
+* Operating system maintains **Scheduling queues** of processes.
+  * **Job queue** - set of all processes in the system
+  * **Ready queue** - set of all processes residing in main memory, ready and waiting to execute.
+  * **Device queues** - set of processes waiting for a I/O device. Usually a separate device queue for each device
+
+* Processes migrate among the various queues.
+* Scheduler:  selected a process from a queue. 
+
+### Schedulers
+
+* **Short-term scheduler** or we called it **CPU scheduler** - selects processes should be executed next and allocates CPU.
+  * Sometimes the only scheduler in a system.
+  * Short-term scheduler is invoked frequently
+
+* **Long-term scheduler** or we called it **Job scheduler** - selects which process should be brought into the ready queue.
+  * 
