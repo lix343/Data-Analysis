@@ -25,3 +25,35 @@
 
 ### Operations On Processes
 
+* System must provide mechanism for:
+  * Process creation
+  * Process termination
+
+#### Process Creation
+
+* Every process is given an integer identifier called the ***Process identifier(pid)*** 
+* A process ***parent process***  can create another process ***child process***
+* In addition to PID of a process, its PPID is also stored as well
+
+### Parent - Child Sharing
+
+* Resources sharing options
+  * Parent and children share all resources
+  * Children share subset of parent's resources
+  * Parent and child share no resources
+
+* Execution options
+  * Parent and children execute concurrently
+  * Parent waits until children terminate
+
+* Address space sharing options:
+  * Child is a duplicate of parent (has the same program and data as the parent)
+  * Child has a new program loaded into it
+
+### Creating Processes in Linux/Unix
+
+* **fork()** system call is used to create a new process
+* **fork()** takes no arguments and return a process ID (in the parent)
+* The new process created by fork becomes the child process of the calling process
+* This child process has the same environment as its parent; that is, it is an exact copy of the parent with only a different process ID.
+* After a new child process is created, both the parent and child will execute the next instruction following the **fork()** system call. 
