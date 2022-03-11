@@ -117,6 +117,92 @@
 * **Short-term scheduler** or we called it **CPU scheduler** - selects processes should be executed next and allocates CPU.
   * Sometimes the only scheduler in a system.
   * Short-term scheduler is invoked frequently
-
 * **Long-term scheduler** or we called it **Job scheduler** - selects which process should be brought into the ready queue.
-  * 
+* **Swapping**: is the term used for removing a process from main memory store on disk and later bring it back in from disk to continue execution.
+* **Medium - term scheduler**: used to queue swapped jobs
+  * can be added if degree of multiple programming needs to decrease
+
+### Interprocess Communication
+
+* Processes within a system may be:
+  * ***Independent***
+  * ***Cooperating*** (It can affect or be affected by other processes, including sharing data)
+
+* Reasons for cooperating processes:
+  * Information sharing, computation speedup, modularity and convenience.
+
+* Cooperating processes need **interprocess communication** (IPC)
+
+* Two models of IPC
+  * Shared memory
+  * Message passing
+
+### IPC - Shared Memory
+
+* An area of memory shared among the processes that wish to communicate
+* The communication is under the **control of the user** processes not the operating system.
+* It is more complicated to set up and doesn't work as well across multiple computers.
+* Used for sharing large amount of data.
+* Major issues - synchronize process actions when accessing shared memory.
+
+### IPC - Message Passing
+
+* Operating system provides message passing capability.
+* As a result, Message Passing requires system calls for every message transfer, and is therefore slower.
+* However, it is simpler to set up and works well across multiple computers.
+
+## Chapter 4
+
+### Threads
+
+* A traditional process has a single thread of control.
+* **Multi-threaded applications** have multiple threads within a single process.
+* **Thread** is a basic unit of CPU utilization.
+* Process creation is many times heavy-weight while thread creation is light-weight.
+
+### Threads in Single and Multithreaded Processes
+
+* Each thread consists of:
+  * Thread ID
+  * Program Counter
+  * Set of registers
+  * Stack
+
+* They share
+  * code
+  * data
+  * file
+
+### Multi-threading example
+
+* Editing word document
+  * One thread can interpret the key strokes.
+  * Second thread display images.
+  * Third thread checks spelling and grammer.
+  * Fourth thread does periodic automatic backups of the file being edited.
+
+* Most operating system kernels are multi-threaded
+  * Many threads operate in the kernel process, where each thread performs a specific task.
+    * Managing devides
+    * Managing memory
+    * Interrupt handling
+
+### Advantages
+
+* **Responsiveness** - may allow continued execution if part of process is blocked, especially important for user interfaces.
+* **Resources Sharing** - threads share resources by default.
+* **Economy** - cheaper than process creation, thread switching lower overhead than context switching.
+* **Scalability** - A single process can take advantages  of multiprocessor architectures.
+* Threads enable concurrent programming and on multiple processor systems, true parallelism.
+
+### Parallelism
+
+* **Parallelism** implies a system can perform more than one task simultaneously
+
+### Concurrency
+
+Concurrency supports more than one task making progress.
+
+### Multi-core Programming
+
+* ***Multi-core*** or **Multiprocessor** systems puts pressure on programmers.
