@@ -1,3 +1,164 @@
+# Chapter 1
+
+### Operating System
+
+* Operating System is a program that acts as an intermediary between a user of a computer and the computer hardware
+  * They vary dramatically in accomplishing this:
+    * Mainframes - primary function is to optimize CPU utilization
+    * Smart phones - Ease of use
+    * PC - Everything
+
+* Operating system goals:
+  * Efficient use: Ensure efficient use of a computer's resources
+  * User convenience: Provide convenient methods of using a computer system
+  * Non interference: Prevent interference in the activities of its users
+
+### Computer System Structure
+
+* Computer system can be divided into four component:
+
+  * **Hardware** - provides basic computing resources
+    * CPU, memory, I/O devices
+
+  * Operating system
+    * Controls and coordinates use of hardware among various applications and users
+
+  * Application programs
+    * Define the ways in which the system resources are used to solve the computing problems of the users
+      * Word processors, compliers, web browsers, database system
+
+  * Users
+    * People, machines, other computers
+
+### What Operating Systems do?
+
+* OS is a **resource allocator**
+  * Manage all resources(such as memory, CPU, I/O devices)
+  * Decides between conflicting requests for efficient and fair resource use
+
+* OS is a **control program**
+  * Controls execution of programs to prevent errors and improper use of the computer
+
+### What is an OS?
+
+* Primarily an OS consists of the:
+  * **Kernel**
+    * Part that stays in main memory (the one program always running on the computer)
+    * Controls the execution of all other programs
+      * other programs(system or user) interact with it through **System calls** (are routines mostly written in a high level language.)
+
+### Computer System Organization
+
+* One or more CPUs, device controllers connect through common bus providing access to shared memory
+* Concurrent execution of CPUs and devices competing for memory.
+
+
+
+### I/O Structure I
+
+* A general-purpose computer system consists of CPUs and multiple device controllers that are connected through a common bus.
+* Each **device controller** is in charge of a specific type of devices. Depending on the controller, more than one device may be attached.
+* A device controller maintains some local buffers storage and a set of special-purpose register.
+* The device controller is responsible for moving the data between the peripheral devices that it controls and its local buffer storage.
+* Typically, in OS there is a device driver for each device controller.
+* This device driver provides the operating system with a uniform interface to the device.
+
+### I/O Structure II
+
+* To start an I/O operation
+  * The device driver loads the appropriate registers within the device controller.
+  * The device controller, in turn, examines the contents of these registers to determine what action to take (read a character from the keyboard)
+  * The controller starts the transfer of data from the device to its local buffer.
+  * Once the transfer of data is complete, the device controller sends an interrupt signal to CPU.
+  * CPU transfers control to ISR which handles this request.
+
+### Computer System Operation - Computer Startup
+
+* When a computer system is switched on or rebooted
+  * It automatically loads a program (**bootstrap program**) stored on a reserved part of an I/O device typically a disk and starts executing the program.
+  * The bootstrap program then
+    * Loads the Operating system kernal
+    * and system programs (system daemons)
+  * The kernal and system programs run all the time on the computer provide services.
+  * After the system is fully booted it waits for an **event** to occur.
+
+### Computer System Operation - Interrupts
+
+* An operating system is **event driven** and events occur by interrupts. Therefore, OS is **interrupt driven**.
+* Interrupt requires the operating system stop and figure out what to do next.
+* **Interrupt**: A mechanism that enables a device/software to notify CPU that it needs attention.
+* An interrupt is caused by:
+  * Signal to CPU from a device attached to a computer via system bus
+  * An executing program within the computer through system calls.
+* A **trap** or **exception** is a software-generated interrupt caused either by an error or a user request.
+
+### Interrupt Handling I
+
+* When an interrupt occurs:
+  * CPU stops executing current task
+  * The operating system preserves the stat of the CPU by storing registers and the program counter
+  * Transfers execution to a fixed location, which has the starting address of **Interrupt Service Routine (ISR)**
+  * ISR handles the interrupt, after which
+  * Interrupted process resumes its execution
+
+### Interrupt Handling II
+
+* Implementing ISR as a routine is slow and therefore inefficient.
+* Since only predefined interrupt exist, a table of pointers to the various interrupt routines is used instead.
+* This table of addresses is called **Interrupt vector**
+
+### Storage Structure
+
+* CPU can access only main memory (**RAM - Random access memory**)
+  * For programs to run, they must be stored in main memory.
+  * Main memory is volatile (lost data with loss of power)
+  * Need secondary storage (Hard disk drives) to store data permanently and in large quantities
+* All forms of memory provides an array of bytes, and each byes as its own address
+
+### Caching
+
+* **Cache** is a faster storage system than main memory and is located very closer ot CPU
+* When CPU needs a particular piece of information it first checks in cache, if it finds it, it is called a 'HIT'
+* If the information is not in the cache it called a 'Miss'
+* CPU then gets information from main memory and places a copy of it in the Cache.
+* Careful selection of cache size and replacement policy greatly increase the system's    performance.
+* other caches implemented into the hardware
+
+### Computer System Architecture
+
+* A **Single processor** system has
+  * One general purpose CPU
+  * Possibly more than one special purposes CPUs
+* Multi-processors
+  * More than one general purpose CPUs
+  * Advantages include: increased throughput, economy of scale, increased reliability.
+
+### Computer-System Architecture
+
+* Tow types of Multi-processing:
+  * Asymmetric Multiprocessing:
+    * Boss processor controls system
+    * Each processor is assigned a special task
+    * Boss process schedules/allocates processes
+  * Symmetric Multiprocessing
+    * Each processor perform all tasks.
+    * All modern system provides support for SMP
+
+### Multi-core Design
+
+* Multi-processor systems can be Multi-chip or **multicore**
+* Multi-core systems are efficient as on chip communication is faster and consumes less power
+
+### Operating System Structure
+
+* An operating system provides the environment within which programs are executed
+* **Multiprogramming:** organize jobs so CPU always has one to execute
+  * A subset of total jobs in system 23
+
+# Chapter 2
+
+
+
 # Chapter 3
 
 ### Types of Processes
@@ -160,7 +321,7 @@
 * **Thread** is a basic unit of CPU utilization.
 * Process creation is many times heavy-weight while thread creation is light-weight.
 
-### Threads in Single and Multithreaded Processes
+### Threads in Single and Multi-threaded Processes
 
 * Each thread consists of:
   * Thread ID
