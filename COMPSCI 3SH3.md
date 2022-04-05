@@ -149,11 +149,19 @@
 * Multi-processor systems can be Multi-chip or **multicore**
 * Multi-core systems are efficient as on chip communication is faster and consumes less power
 
-### Operating System Structure
+### Operating System Structure I
 
 * An operating system provides the environment within which programs are executed
 * **Multiprogramming:** organize jobs so CPU always has one to execute
-  * A subset of total jobs in system 23
+  * A subset of total jobs in system is kept in memory
+  * One job selected and run via **job scheduling**
+  * When it has to wait (for I/O), OS switches to another job
+
+### Operating System Structure II
+
+* Timesharing (multitasking) is logical extension of multiprogramming
+  * CPU switches jobs so frequently that users can interact with each job while it is running, creating **interactive** computing
+  * Respon
 
 # Chapter 2
 
