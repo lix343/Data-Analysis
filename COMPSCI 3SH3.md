@@ -161,7 +161,59 @@
 
 * Timesharing (multitasking) is logical extension of multiprogramming
   * CPU switches jobs so frequently that users can interact with each job while it is running, creating **interactive** computing
-  * Respon
+  * Respond time should be <1 second
+  * Each user has at least one program executing in memory -> process
+  * If several jobs ready to run at the same time -> CPU scheduling
+
+### Operating-System Operations
+
+* Dual-mode operation allows OS to protect itself and other system components
+  * User mode and kernel mode
+  * **Mode bit** provided by hardware
+    * Provides ability to distinguish when system is running user code or kernel code
+    * Kernel mode bit = 0 and User mode bit = 1 
+    * Some instructions designated as privileged, only executable in kernel mode
+    * System call changed mode to kernel, return from call resets it to user
+* Increasingly CPUs support multi-mode operations
+  * Virtual machine manager mode for guest VMs
+
+### Operating-System Operations - Timer
+
+* Timer: is a hardware component that can be set to interrupt the computer after a specified period.
+* Timer helps to prevent infinite loop/ process hogging resources
+* To set the time period the operating system maintains a counter and sets its value, which is decremented by the physical clock.
+* When counter reaches zero generate an interrupt
+* Set up before scheduling process to regain control or terminate program that exceeds allotted time.
+
+### Key functionality of an OS
+
+* Process Management
+* Memory Management
+* Storage and File management
+* Protection and Security
+
+### Process
+
+* Process is a program in execution
+* Program is passive entity stored on disk (**executable file**), process is active
+  * Program becomes process when executable file loaded into memory
+
+### Kernel Data Structures
+
+* Many similar to standard programming data structures
+  * Linked lists
+  * Binary search tree
+  * Hash Tables
+* Bitmap - string of n binary digits representing the status of n items
+
+### Computing Environments - Virtualization
+
+* **Virtualization**  is a technology that creates abstraction of the computer hardware, thereby creating an illusion that all its operating systems are running on it own private computer.
+  * VMM provides virtualization 
+
+* Virtualization belongs to the Emulation class of software
+
+
 
 # Chapter 2
 
