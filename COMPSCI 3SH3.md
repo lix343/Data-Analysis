@@ -217,9 +217,125 @@
 
 # Chapter 2
 
+### Operating System Services - for user
+
+* Operating systems provide an environment for execution of programs and services to programs and users
+* **Operating-system** services for the user:
+  * User interface to interact with OS
+  * Program execution
+  * I/O operations
+  * File-system manipulation
+  * Communications
+  * Error detection
+
+### Operating System Services - for system
+
+* Resource allocation
+* Accounting
+* Protection and Security
+
+### User and Operating-System Interface
+
+**Command Line Interpreter (CLI)** allows direct command entry to OS
+
+* Windows and Unix treat CLI as a separate program, CLI is not part of kernal
+* In Unix / Linux they are called **Shells**
+* Primary job is to fetch a command from user and execute it
+* Sometimes the CLI itself contains the code to execute the command.
+* Sometimes just names of programs
+  * Adding new features doesn't require shell modification!
+
+### Shells in Unix and Linux
+
+* Multiple shells are available (I can write my own program)
+* $ echo $0 OR $ echo $SHELL will give you the current shell
+* Shells do not have the code to execute the request
+* Eg: rm file.txt in terminal -> Invokes Shell -> Shell searches for file rm -> load rm in memory -> executes it with file.txt as parameter
+* Shell has no idea how **'rm'** command is implemented and the system call used to process the request
+
+### System Calls
+
+* Provide an interface to OS services
+* Are routines mostly written in a high-level language.
+* Accessed by programs via a high-level **Application Programming interface(API)** rather than direct system call use
+
+### API
+
+* An API specifies a set of interfaces available to the programmer
+* These interfaces can be implemented as single or multiple system calls
+* API used as system calls are detailed and difficult to work with
+* Three most common APIs are:
+  * Win32 API for windows
+  * POSIX API
+  * JAVA API
+
+### System Call Implementation
+
+* The API makes the appropriate system calls through the **System Call Interface**
+* **System Call Interface** serves as a link to system calls made available by the operating system
+  * Each system call has a number that uniquely identifies it
+  * Maintains a table indexed according to these numbers
+* The user program need know nothing about how the system call is implemented
+  * Just needs to obey API and understand what OS will do as a result after the system call is invoked
+  * Most details of OS interface hidden from programmer by API
+
+### System Call Parameter Passing I
+
+* Often, more information is required than simply knowing the identity of the desired system call.
+  * Exact type and amount of information vary according to OS and call
+* Three general methods used to pass parameters to the OS
+  * Simplest: pass the parameters in registers
+    * In some cases, may be more parameters than registers.
+
+### System Call Parameter Passing II
+
+* Parameters stored in a block, or table, in memory, and address of **block** is passed as a parameter in a register.
+  * This approach taken by Linux and Solaris
+* Parameters placed, or **Pushed**, onto the **stack** and **popped** off the stack by the operating system
+* Block and stack method do not limit the number of length of parameters being passed
+
+### System Programs
+
+* Provide a convenient environment for program development and execution
+  * Some of them are simply user interfaces to system calls; others are considerable more complex
+* They are also called **system utilities**
+* Constantly running system-program processes are known as **services, subsystems, daemons**
+
+### Operating System Structure
+
+* General-purpose OS is a very large program
+* Various ways to structure an OS
+  * Simple struture
+  * Non-simple structure
+  * Layered - an abstraction
+  * Micro-kernel - Mach
+  * Module
+
+### Simple Monolithic Structure -- MS
+
+* Simple monolithic structure has little to no structure at all.
+* All of the functionality of the kernel is placed into a single, static binary file that runs in a single address space.
+
+### 21
+
 
 
 # Chapter 3
+
+### Process
+
+* Process is a program in execution
+* Program is passive entity stored on disk.
+  * Program becomes process when executable file loaded into memory
+
+### Process State
+
+* As a process executes, it changes **state**
+  * New: the process is being created
+  * ready: the process is waiting to be assigned to a processor
+  * running: instructions are being executed
+  * waiting: the process is waiting for some event to occur
+  * terminated: the process has finished execution
 
 ### Types of Processes
 
@@ -427,3 +543,23 @@ Concurrency supports more than one task making progress.
 ### Multi-core Programming
 
 * ***Multi-core*** or **Multiprocessor** systems puts pressure on programmers.
+
+# Chapter 5
+
+### Background
+
+* Processes can execute concurrently
+* Concurrent access to shared data may result in data inconsistency 
+* Maintaining data consistency requires mechanisms to ensure the orderly execution of cooperating processes
+
+### Producer Consumer Problem I
+
+* A **producer** produces information and places in the buffer
+* Consumer consumes information from the buffer
+* The producer and consumer must be synchronized, so that the consumer does not try to consumer an item that has not yet been produced, and the producer must wait if the buffer is full
+
+###  Producer Consumer Problem II
+
+* A solution to the consumer-producer problem can maintain an integer **counter** that keeps track of the number of full buffers
+* Initially, **counter** is set to 0.
+* **Counter** is incremented by the producer after it produces a new buffer item and is decremented by the consumer after it consumes a buffer 
