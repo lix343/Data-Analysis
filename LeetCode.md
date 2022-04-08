@@ -178,3 +178,129 @@ GROUP BY
     event_day, emp_id
 ```
 
+### 182. Duplicate Emails
+
+```sql
+Input: 
+Person table:
++----+---------+
+| id | email   |
++----+---------+
+| 1  | a@b.com |
+| 2  | c@d.com |
+| 3  | a@b.com |
++----+---------+
+Output: 
++---------+
+| Email   |
++---------+
+| a@b.com |
++---------+
+```
+
+Answer:
+
+``` sql
+SELECT
+    email as Email
+FROM 
+    Person
+GROUP BY
+    email
+HAVING
+    COUNT(email) > 1
+```
+
+###  176 Second Highest Salary
+
+```sql
+Input: 
+Employee table:
++----+--------+
+| id | salary |
++----+--------+
+| 1  | 100    |
+| 2  | 200    |
+| 3  | 300    |
++----+--------+
+Output: 
++---------------------+
+| SecondHighestSalary |
++---------------------+
+| 200                 |
++---------------------+
+```
+
+```sql
+Input: 
+Employee table:
++----+--------+
+| id | salary |
++----+--------+
+| 1  | 100    |
++----+--------+
+Output: 
++---------------------+
+| SecondHighestSalary |
++---------------------+
+| null                |
++---------------------+
+```
+
+Answer:
+
+``` sql
+SELECT
+    MAX(salary) AS SecondHighestSalary
+FROM
+    Employee
+WHERE
+    salary < (SELECT MAX(salary) FROM Employee)
+```
+
+### 183 Customers Who Never Order
+
+```sql
+Input: 
+Customers table:
++----+-------+
+| id | name  |
++----+-------+
+| 1  | Joe   |
+| 2  | Henry |
+| 3  | Sam   |
+| 4  | Max   |
++----+-------+
+Orders table:
++----+------------+
+| id | customerId |
++----+------------+
+| 1  | 3          |
+| 2  | 1          |
++----+------------+
+Output: 
++-----------+
+| Customers |
++-----------+
+| Henry     |
+| Max       |
++-----------+
+```
+
+Answer:
+
+``` sql
+SELECT
+    name as Customers
+FROM  
+    Customers
+WHERE
+    id NOT IN (SELECT customerId FROM Orders)
+```
+
+777777
+
+### 184. Department Highest Salary
+
+
+
