@@ -302,5 +302,25 @@ WHERE
 
 ### 184. Department Highest Salary
 
-### kwadnkaw
+### Simple question
 
+``` sql
+SELECT
+    d.name as Department, e.name as Employee, e.salary as Salary
+FROM
+    Employee e
+LEFT JOIN Department d
+ON e.departmentId = d.id
+WHERE (e.departmentId, e.salary) IN
+(
+    SELECT
+        departmentId, MAX(salary) 
+    FROM
+        Employee e
+    GROUP BY
+        e.departmentId
+)
+
+```
+
+### 185 Department Top Three Salaries
